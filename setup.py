@@ -1,4 +1,5 @@
-import setuptools 
+import setuptools
+from stdlib_list import __version__
 
 
 try:
@@ -14,13 +15,15 @@ except IOError:
 
 
 setuptools.setup(
-    name='python-stdlib-list',
+    name='stdlib-list',
     license='MIT',
     author='Jack Maney',
     author_email='jackmaney@gmail.com',
     url='https://github.com/jackmaney/python-stdlib-list',
-    version='0.0.0',
+    version=__version__,
     install_requires=requirements,
-    description='Scraping the Python Docs for the names of all the standard libraries.',
-    long_description=long_description
+    description='A list of Python Standard Libraries (2.6-7, 3.2-4).',
+    long_description=long_description,
+    include_package_data=True,
+    packages=setuptools.find_packages()
 )
