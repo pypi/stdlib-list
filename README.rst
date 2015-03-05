@@ -18,6 +18,7 @@ Usage
 The only argument you need to worry about specifying is a (major and minor) version number:
 
 ::
+    
     >>> from stdlib_list import short_versions
     >>> short_versions
     ['2.6', '2.7', '3.2', '3.3', '3.4']
@@ -33,6 +34,7 @@ Or, if you prefer, an exact version of one of the standard library pages that I 
 With that in mind, here's how you can grab a list of standard libraries:
 
 ::
+
     >>> from stdlib_list import stdlib_list
     >>> libraries = stdlib_list("2.7")
     >>> libraries[:10]
@@ -44,11 +46,13 @@ Installation
 The easy way is via ``pip``:
 
 ::
+
     pip install stdlib_list
 
 The hard way is to clone this repository, go into the directory into which you cloned this repo, and do a
 
 ::
+
     python setup.py install
 
 
@@ -65,6 +69,7 @@ The Scraper
 You shouldn't need to fiddle around with the scraper, but in case you want to (or in case the Python Software Foundation decides to change the page layout of the standard library TOC page), just do:
 
 ::
+
     from stdlib_list import scraper
     scraper.scrape("2.7") # Scrape for 2.7 only (for debugging, mainly)
     scraper.scrape() # Scrape for all versions listed above.
