@@ -1,2 +1,3 @@
 recursive-include stdlib_list/lists *.csv
 include README.rst
+include LICENSE

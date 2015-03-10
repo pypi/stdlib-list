@@ -22,6 +22,12 @@ for ver in short_versions:
 
 
 def scrape(version=None):
+    """
+    Scrapes the Python Module Index for the specified version(s) of Python, and stores the resulting data within the ``lists`` subdirectory of this package.
+
+    :param version: A specified version of Python whose module index is to be scraped. If this is not set, then all avaliable versions are scraped.
+    :type version: one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, or ``"3.4"``, or ``None``
+    """
 
     if version is not None:
         versions_to_scrape = [get_canonical_version(version)]
