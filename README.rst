@@ -20,4 +20,4 @@ Usage
     >>> libraries[:10]
     ['AL', 'BaseHTTPServer', 'Bastion', 'CGIHTTPServer', 'ColorPicker', 'ConfigParser', 'Cookie', 'DEVICE', 'DocXMLRPCServer', 'EasyDialogs']
 
-For more details, check out `the docs <http://stdlib-list.readthedocs.org/en/latest/>`_.
+For more details, check out `the docs <http://python-stdlib-list.readthedocs.org/en/latest/>`_.
