@@ -3,11 +3,22 @@ from . import short_versions, data_dir, get_canonical_version
 import os
 import requests
 import bs4
+import csv
+import re
 
-urls = {
-    ver: "https://docs.python.org/{}/library/index.html".format(
-        ver).replace("2.7", "2") for ver in short_versions
-}
+urls = {}
+_url_base = "https://docs.python.org/"
+
+for ver in short_versions:
+    url = _url_base
+    suffix = "py-modindex.html"
+
+    if ver == "2.6":
+        suffix = "modindex.html"
+
+    url += "{}/{}".format(ver, suffix)
+
+    urls[ver] = url
 
 
 def scrape(version=None):
@@ -21,60 +32,67 @@ def scrape(version=None):
         response = requests.get(urls[ver])
         soup = bs4.BeautifulSoup(response.text)
 
-        if ver == "2.6":
-            l1_selector = "ul > li.toctree-l1"
-        else:
-            l1_selector = "div.toctree-wrapper.compound > ul > li.toctree-l1"
+        # Grab the table
+        table = soup.find("table")
 
-        l1_tags = soup.select(l1_selector)
+        # Only take the rows that:
+        #
+        # * Aren't section headers (first two parenthesized conditions), and
+        # * Have a section name ("td > a > tt")
 
-        # Weed out the introduction and those covering built-in stuff
-
-        l1_tags = [
-            x for x in l1_tags
-            if not x.a.text.endswith("Introduction")
-            and "Built-in" not in x.a.text
+        table_rows = [
+            x for x in table.select("tr")
+            if ("class" not in x.attrs
+                or x["class"] not in [["pcap"], ["cap"]])
+            and x.select("td > a > tt")
         ]
 
-        # Grab the level 2 TOC list items under each level 1.
-        # Note that the list comprehension returns a
-        # list of list of tags. The sum(., []) flattens it out.
+        metadata = {}
+        # module: {
+        #     "os": (Windows/Unix/etc/default of None),
+        #     "description": description,
+        #     "deprecated": (default of None)
+        # }
 
-        l2_tags = sum([x.select("li.toctree-l2") for x in l1_tags], [])
+        for row in table_rows:
+            os_name = None
+            description = None
+            deprecated = None
 
-        libraries = sorted(
-            list(set([x.text for x in sum([y.select("span.pre")
-                                           for y in l2_tags], [])])))
+            td_a = [x for x in row("td") if x.select("a")][0]
+            a = td_a.select("a")[0]
+            module = a.text
 
-        # There's one reference to a file extension in the same
-        # span.pre that we're using for module names, and also mention
-        # of methods (eg os.statvfs()). So strip 'em out
-        libraries = [
-            x for x in libraries if not x.startswith(".")
-            and "(" not in x and ")" not in x
-        ]
+            os_select = td_a.select("em")
+            if os_select:
+                os_name = os_select[0].text.replace("(", "").replace(")", "")
 
-        # Finally, some mentions of modules, such as xml.sax.handler,
-        # need to be broken down so that we know that xml.sax and
-        # xml are both included.
+            description = td_a.next_sibling.select("em")[0].text
 
-        dot_libs = [x for x in libraries if "." in x]
+            # Some longer descriptions have EOL characters built into them...
+            description = re.sub("\r?\n", " ", description)
 
-        for lib in dot_libs:
-            lib_split = lib.split(".")
-            # Ensure that all super-modules are included (A, A.B, A.B.C, etc)
+            if td_a.next_sibling.select("strong"):
+                if td_a.next_sibling.select(
+                        "strong")[0].text.lower().startswith("deprecated"):
+                    deprecated = 1
 
-            for i in range(len(lib_split)):
-                libraries.append(".".join(lib_split[:i]))
-
-        # Dedupe, make sure we have no empty strings, and sort, to
-        # make things all pretty-like:
-
-        libraries = sorted(list(set([x for x in libraries if x])))
+            metadata[module] = {
+                "os": os_name,
+                "description": description,
+                "deprecated": deprecated
+            }
 
         # Write to file!
 
-        file_name = os.path.join(data_dir, "{}.txt".format(ver))
+        file_name = os.path.join(data_dir, "{}.csv".format(ver))
 
         with open(file_name, "w") as f:
-            f.write("\n".join(libraries))
+            writer = csv.writer(f, lineterminator="\n")
+            writer.writerow(["module", "os", "description", "deprecated"])
+
+            for module in sorted(metadata.keys()):
+                writer.writerow(
+                    [module] + [metadata[module][x]
+                                for x in ["os", "description", "deprecated"]]
+                )

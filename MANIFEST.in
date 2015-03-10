@@ -1,2 +1,2 @@
-recursive-include stdlib_list/lists *.txt
+recursive-include stdlib_list/lists *.csv
 include README.rst
