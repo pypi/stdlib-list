@@ -1,0 +1,85 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Python-stdlib-list</title>
+  <meta name="description" content="A list of Python Standard Libraries (2.6-7, 3.2-4).">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Python-stdlib-list</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">A list of Python Standard Libraries (2.6-7, 3.2-4).</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/jackmaney/python-stdlib-list/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/jackmaney/python-stdlib-list/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/jackmaney/python-stdlib-list" class="code">View Python-stdlib-list on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
+<a id="python-standard-library-list" class="anchor" href="#python-standard-library-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Python Standard Library List</h1>
+
+<p>This package includes lists of all of the standard libraries for Python 2.6, 2.7, 3.2, 3.3, and 3.4, along with the code for scraping the official Python docs to get said lists.</p>
+
+<h2>
+<a id="listing-the-modules-in-the-standard-library-wait-why-on-earth-would-you-care-about-that" class="anchor" href="#listing-the-modules-in-the-standard-library-wait-why-on-earth-would-you-care-about-that" aria-hidden="true"><span class="octicon octicon-link"></span></a>Listing the modules in the standard library? Wait, why on Earth would you care about that?!</h2>
+
+<p>Because knowing whether or not a module is part of the standard library will come in handy in <a href="https://github.com/jackmaney/pypt">a project of mine</a>. <a href="http://stackoverflow.com/questions/6463918/how-can-i-get-a-list-of-all-the-python-standard-library-modules">And I'm not the only one</a> who would find this useful. Or, the TL;DR answer is that it's handy in situations when you're analyzing Python code and would like to find module dependencies.</p>
+
+<p>After googling for a way to generate a list of Python standard libraries (and looking through the answers to the previously-linked Stack Overflow question), I decided that I didn't like the existing solutions. So, I started by writing a scraper for the TOC of the Python Module Index for each of the versions of Python above.</p>
+
+<p>However, web scraping can be a fragile affair. Thanks to <a href="https://github.com/jackmaney/python-stdlib-list/issues/1#issuecomment-86517208">a suggestion</a> by <a href="https://github.com/ncoghlan">@ncoghlan</a>, and some further help from <a href="https://github.com/birkenfeld">@birkenfeld</a> and <a href="https://github.com/epc">@epc</a>, the population of the lists is now done by grabbing and parsing the Sphinx object inventory for the official Python docs of each relevant version.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<pre><code>&gt;&gt;&gt; from stdlib_list import stdlib_list
+&gt;&gt;&gt; libraries = stdlib_list("2.7")
+&gt;&gt;&gt; libraries[:10]
+['AL', 'BaseHTTPServer', 'Bastion', 'CGIHTTPServer', 'ColorPicker', 'ConfigParser', 'Cookie', 'DEVICE', 'DocXMLRPCServer', 'EasyDialogs']
+</code></pre>
+
+<p>For more details, check out <a href="http://python-stdlib-list.readthedocs.org/en/latest/">the docs</a>.</p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/jackmaney" class="avatar"><img src="https://avatars1.githubusercontent.com/u/1554625?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/jackmaney">jackmaney</a> maintains <a href="https://github.com/jackmaney/python-stdlib-list">Python-stdlib-list</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/jackmaney/python-stdlib-list/tarball/master" class="tar">tar</a><a href="https://github.com/jackmaney/python-stdlib-list/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
