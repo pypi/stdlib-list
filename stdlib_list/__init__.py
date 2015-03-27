@@ -22,4 +22,3 @@ def get_canonical_version(version):
 
 
 from .base import stdlib_list
-from .fetch import fetch_list

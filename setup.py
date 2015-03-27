@@ -1,5 +1,5 @@
 import setuptools
-from stdlib_list import __version__
+from stdlib_list._version import __version__
 
 
 try:
@@ -7,11 +7,6 @@ try:
         long_description = f.read()
 except IOError:
     long_description = ""
-try:
-    with open("'requirements.txt'") as f:
-        requirements = [x for x in [y.strip() for y in f.readlines()] if x]
-except IOError:
-    requirements = []
 
 
 setuptools.setup(
@@ -21,7 +16,7 @@ setuptools.setup(
     author_email='jackmaney@gmail.com',
     url='https://github.com/jackmaney/python-stdlib-list',
     version=__version__,
-    install_requires=requirements,
+    install_requires=["sphinx"],
     description='A list of Python Standard Libraries (2.6-7, 3.2-4).',
     long_description=long_description,
     include_package_data=True,
