@@ -7,10 +7,12 @@ import os
 
 def stdlib_list(version):
     """
-    Given a ``version``, return a ``list`` of names of the Python Standard Libraries for that version. These names are obtained from the Sphinx inventory file (used in :py:mod:`sphinx.ext.intersphinx`).
+    Given a ``version``, return a ``list`` of names of the Python Standard
+    Libraries for that version. These names are obtained from the Sphinx inventory
+    file (used in :py:mod:`sphinx.ext.intersphinx`).
 
-    :param version: The version (as a string) whose list of libraries you want.
-    :type version: one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, or ``"3.4"``
+    :param str version: The version (as a string) whose list of libraries you want
+    (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, or ``"3.5"``)
 
     :return: A list of standard libraries from the specified version of Python
     :rtype: list

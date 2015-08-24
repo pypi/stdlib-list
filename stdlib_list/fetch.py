@@ -6,7 +6,6 @@ from . import base_dir, get_canonical_version, short_versions, list_dir
 
 
 class DummyApp(object):
-
     """
     Dummy app object for `fetch_inventory`_ to work.
 
@@ -22,14 +21,18 @@ def fetch_list(version=None):
     """
     For the given version of Python (or all versions if no version is set), this function:
 
-    - Uses the `fetch_inventory` function of :py:mod`sphinx.ext.intersphinx` to grab and parse the Sphinx object inventory (ie ``http://docs.python.org/<version>/objects.inv``) for the given version.
+    - Uses the `fetch_inventory` function of :py:mod`sphinx.ext.intersphinx` to
+    grab and parse the Sphinx object inventory
+    (ie ``http://docs.python.org/<version>/objects.inv``) for the given version.
 
     - Grabs the names of all of the modules in the parsed inventory data.
 
     - Writes the sorted list of module names to file (within the `lists` subfolder).
 
-    :param str version: A specified version of Python. If not specified, then all available versions of Python will have their inventory objects fetched and parsed, and have their module names written to file.
-    :type version: one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, or ``"3.4"``, or ``None``
+    :param str|None version: A specified version of Python. If not specified, then all
+    available versions of Python will have their inventory objects fetched
+    and parsed, and have their module names written to file.
+    (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, ``"3.5"``, or ``None``)
 
     """
 
