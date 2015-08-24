@@ -17,7 +17,7 @@ setuptools.setup(
     url='https://github.com/jackmaney/python-stdlib-list',
     version=__version__,
     install_requires=["sphinx"],
-    description='A list of Python Standard Libraries (2.6-7, 3.2-4).',
+    description='A list of Python Standard Libraries (2.6-7, 3.2-5).',
     long_description=long_description,
     include_package_data=True,
     packages=setuptools.find_packages()
