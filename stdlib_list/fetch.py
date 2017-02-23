@@ -1,8 +1,17 @@
-from sphinx.ext.intersphinx import fetch_inventory
-import warnings
 import os
+import warnings
+
+from sphinx.ext.intersphinx import fetch_inventory
 
 from . import base_dir, get_canonical_version, short_versions, list_dir
+
+
+class DummyConfig(object):
+    def __init__(self, intersphinx_mapping=None, intersphinx_cache_limit=5, intersphinx_timeout=None):
+        self.intersphinx_mapping = intersphinx_mapping or {}
+        self.intersphinx_cache_limit = intersphinx_cache_limit
+        self.intersphinx_timeout = intersphinx_timeout
+        self.tls_verify = True
 
 
 class DummyApp(object):
@@ -15,6 +24,11 @@ class DummyApp(object):
     def __init__(self):
         self.srcdir = base_dir
         self.warn = warnings.warn
+
+        self.config = DummyConfig()
+
+    def info(self, msg):
+        print("DummyApp.info: {}".format(msg))
 
 
 def fetch_list(version=None):

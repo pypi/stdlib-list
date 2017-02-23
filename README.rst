@@ -1,7 +1,7 @@
 Python Standard Library List
 ----------------------------
 
-This package includes lists of all of the standard libraries for Python 2.6, 2.7, 3.2, 3.3, and 3.4, along with the code for scraping the official Python docs to get said lists.
+This package includes lists of all of the standard libraries for Python 2.6, 2.7, 3.2, 3.3, 3.4, 3.5, and 3.6, along with the code for scraping the official Python docs to get said lists.
 
 Listing the modules in the standard library? Wait, why on Earth would you care about that?!
 ===========================================================================================
