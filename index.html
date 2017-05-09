@@ -39,7 +39,7 @@
           <h1>
 <a id="python-standard-library-list" class="anchor" href="#python-standard-library-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Python Standard Library List</h1>
 
-<p>This package includes lists of all of the standard libraries for Python 2.6, 2.7, 3.2, 3.3, and 3.4, along with the code for scraping the official Python docs to get said lists.</p>
+<p>This package includes lists of all of the standard libraries for Python 2.6, 2.7, 3.2, 3.3, 3.4, 3.5, and 3.6 along with the code for scraping the official Python docs to get said lists.</p>
 
 <h2>
 <a id="listing-the-modules-in-the-standard-library-wait-why-on-earth-would-you-care-about-that" class="anchor" href="#listing-the-modules-in-the-standard-library-wait-why-on-earth-would-you-care-about-that" aria-hidden="true"><span class="octicon octicon-link"></span></a>Listing the modules in the standard library? Wait, why on Earth would you care about that?!</h2>
@@ -58,7 +58,15 @@
 &gt;&gt;&gt; libraries[:10]
 ['AL', 'BaseHTTPServer', 'Bastion', 'CGIHTTPServer', 'ColorPicker', 'ConfigParser', 'Cookie', 'DEVICE', 'DocXMLRPCServer', 'EasyDialogs']
 </code></pre>
+          
+<p>Or, if your current version of Python is 2.7, then the current version is assumed automatically:</p>
 
+<pre><code>&gt;&gt;&gt; from stdlib_list import stdlib_list
+&gt;&gt;&gt; libraries = stdlib_list()
+&gt;&gt;&gt; libraries[:10]
+['AL', 'BaseHTTPServer', 'Bastion', 'CGIHTTPServer', 'ColorPicker', 'ConfigParser', 'Cookie', 'DEVICE', 'DocXMLRPCServer', 'EasyDialogs']
+</code></pre>
+          
 <p>For more details, check out <a href="http://python-stdlib-list.readthedocs.org/en/latest/">the docs</a>.</p>
         </article>
       </div>
