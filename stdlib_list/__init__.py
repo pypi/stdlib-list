@@ -1,4 +1,6 @@
-from ._version import __version__
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
 
 
 import os
@@ -22,3 +24,4 @@ def get_canonical_version(version):
 
 
 from .base import stdlib_list
+
