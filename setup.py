@@ -1,5 +1,6 @@
 import setuptools
-from stdlib_list._version import __version__
+
+import versioneer
 
 
 try:
@@ -15,10 +16,11 @@ setuptools.setup(
     author='Jack Maney',
     author_email='jackmaney@gmail.com',
     url='https://github.com/jackmaney/python-stdlib-list',
-    version=__version__,
+    version=versioneer.get_version(),
     extras_require={"develop": ["sphinx"]},
     description='A list of Python Standard Libraries (2.6-7, 3.2-6).',
     long_description=long_description,
     include_package_data=True,
-    packages=setuptools.find_packages()
+    packages=setuptools.find_packages(),
+    cmdclass=versioneer.get_cmdclass(),
 )
