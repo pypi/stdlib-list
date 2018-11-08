@@ -25,7 +25,7 @@ install:
 
 script:
   # FIXME: add some real test.
-  - python -c "import stdlib_list; print(dir(stdlib_list))"
+  - python -c "import stdlib_list; print(stdlib_list.stdlib_list('$TRAVIS_PYTHON_VERSION'))"
 
 deploy:
   skip_cleanup: true
