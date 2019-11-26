@@ -17,6 +17,7 @@ setuptools.setup(
     author_email='jackmaney@gmail.com',
     url='https://github.com/jackmaney/python-stdlib-list',
     version=versioneer.get_version(),
+    install_requires=['functools32;python_version<"3.2"'],
     extras_require={"develop": ["sphinx"]},
     description='A list of Python Standard Libraries (2.6-7, 3.2-6).',
     long_description=long_description,
