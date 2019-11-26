@@ -1,6 +1,14 @@
-from setuptools import setup, find_packages
+import os
+
+from setuptools import find_packages, setup
 
 import versioneer
+
+rootpath = os.path.dirname(os.path.abspath(__file__))
+
+
+def read(*parts):
+    return open(os.path.join(rootpath, *parts), "r").read()
 
 
 setup(
@@ -13,7 +21,7 @@ setup(
     install_requires=["functools32;python_version<'3.2'"],
     extras_require={"develop": ["sphinx"]},
     description="A list of Python Standard Libraries (2.6-7, 3.2-8).",
-    long_description=f'{read("README.md")}',
+    long_description="{}".format(read("README.md")),
     long_description_content_type="text/markdown",
     include_package_data=True,
     packages=find_packages(),
