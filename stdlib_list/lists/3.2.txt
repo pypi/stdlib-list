@@ -1,6 +1,7 @@
 __future__
 __main__
 _dummy_thread
+_struct
 _thread
 abc
 aifc
@@ -111,6 +112,7 @@ email.message
 email.mime
 email.parser
 email.utils
+encodings
 encodings.idna
 encodings.mbcs
 encodings.utf_8_sig
@@ -194,6 +196,7 @@ platform
 plistlib
 poplib
 posix
+posixpath
 pprint
 profile
 pstats
