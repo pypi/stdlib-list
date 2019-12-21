@@ -24,6 +24,6 @@ setup(
     long_description="{}".format(read("README.md")),
     long_description_content_type="text/markdown",
     include_package_data=True,
-    packages=find_packages(),
+    packages=find_packages(exclude=["tests", "tests.*"]),
     cmdclass=versioneer.get_cmdclass(),
 )
