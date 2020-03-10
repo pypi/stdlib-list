@@ -1,16 +1,13 @@
 from __future__ import print_function, absolute_import
 
 import os
+import pkgutil
 import sys
 
 try:
     from functools import lru_cache
 except ImportError:
     from functools32 import lru_cache
-
-base_dir = os.path.dirname(os.path.realpath(__file__))
-
-list_dir = os.path.join(base_dir, "lists")
 
 long_versions = ["2.6.9", "2.7.9", "3.2.6", "3.3.6", "3.4.3", "3.5", "3.6",
                  "3.7", "3.8"]
@@ -45,10 +42,11 @@ def stdlib_list(version=None):
     version = get_canonical_version(version) if version is not None else '.'.join(
         str(x) for x in sys.version_info[:2])
 
-    module_list_file = os.path.join(list_dir, "{}.txt".format(version))
+    module_list_file = os.path.join("lists", "{}.txt".format(version))
 
-    with open(module_list_file) as f:
-        result = [y for y in [x.strip() for x in f.readlines()] if y]
+    data = pkgutil.get_data("stdlib_list", module_list_file).decode()
+
+    result = [y for y in [x.strip() for x in data.splitlines()] if y]
 
     return result
 

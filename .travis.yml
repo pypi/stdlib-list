@@ -10,15 +10,11 @@ python:
   - 3.7
   - 3.8
 
-before_install:
-  - pip install -r requirements-dev.txt
-
 install:
   - python setup.py sdist && version=$(python setup.py --version) && pushd dist && pip install stdlib-list-${version}.tar.gz && popd
 
 script:
-  # FIXME: add some real test.
-  - python -c "import stdlib_list; print(stdlib_list.stdlib_list('$TRAVIS_PYTHON_VERSION'))"
+  - python -m tests
 
 deploy:
   skip_cleanup: true
