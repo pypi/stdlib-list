@@ -11,6 +11,7 @@ class DummyConfig(object):
         self.intersphinx_mapping = intersphinx_mapping or {}
         self.intersphinx_cache_limit = intersphinx_cache_limit
         self.intersphinx_timeout = intersphinx_timeout
+        self.user_agent = "python-stdlib-list"
         self.tls_verify = True
 
 
