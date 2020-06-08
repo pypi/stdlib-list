@@ -11,6 +11,7 @@ class DummyConfig(object):
         self.intersphinx_mapping = intersphinx_mapping or {}
         self.intersphinx_cache_limit = intersphinx_cache_limit
         self.intersphinx_timeout = intersphinx_timeout
+        self.user_agent = "python-stdlib-list"
         self.tls_verify = True
 
 
@@ -46,7 +47,7 @@ def fetch_list(version=None):
     :param str|None version: A specified version of Python. If not specified, then all
     available versions of Python will have their inventory objects fetched
     and parsed, and have their module names written to file.
-    (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, ``"3.5"``, ``"3.6"``, ``"3.7"``, ``"3.8"`` or ``None``)
+    (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, ``"3.5"``, ``"3.6"``, ``"3.7"``, ``"3.8"``, ``"3.9"`` or ``None``)
 
     """
 
