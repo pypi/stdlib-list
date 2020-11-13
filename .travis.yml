@@ -15,17 +15,3 @@ install:
 
 script:
   - python -m tests
-
-deploy:
-  skip_cleanup: true
-  provider: pypi
-  user: ocefpaf
-  password:
-    secure: "Q4v+Im8wOvYkCfszigRwh26DKSBpgJ49AGffkP3gb592z4uVtVH5DWdXyUE/9zK8qVk4uA5NEBJc8+mHFCztUlYYrPXZCVzX+NyUWv3rmMsDf8tV5Y+9J6pdw0Wx6DvI6nqKD6s2hKu4pey2UW8LO9HQIi97Hlo5Hd5ivbakVX8="
-  distributions: sdist bdist_wheel
-  upload_docs: no
-  on:
-    repo: jackmaney/python-stdlib-list
-    tags: true
-    all_branches: master
-    python: 3.7
