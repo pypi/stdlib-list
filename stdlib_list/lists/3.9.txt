@@ -32,6 +32,7 @@ collections
 collections.abc
 colorsys
 compileall
+concurrent
 concurrent.futures
 configparser
 contextlib
