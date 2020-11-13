@@ -1,8 +1,26 @@
 __future__
 __main__
+_aix_support
+_bootlocale
+_bootsubprocess
+_collections_abc
+_compat_pickle
+_compression
+_markupbase
+_osx_support
+_py_abc
+_pydecimal
+_pyio
+_sitebuiltins
+_strptime
+_sysconfigdata_x86_64_conda_cos6_linux_gnu
+_sysconfigdata_x86_64_conda_linux_gnu
 _thread
+_threading_local
+_weakrefset
 abc
 aifc
+antigravity
 argparse
 array
 ast
@@ -116,6 +134,7 @@ email.mime
 email.parser
 email.policy
 email.utils
+encodings
 encodings.idna
 encodings.mbcs
 encodings.utf_8_sig
@@ -132,6 +151,7 @@ fractions
 ftplib
 functools
 gc
+genericpath
 getopt
 getpass
 gettext
@@ -150,6 +170,7 @@ http.client
 http.cookiejar
 http.cookies
 http.server
+idlelib
 imaplib
 imghdr
 imp
@@ -191,7 +212,10 @@ multiprocessing.sharedctypes
 netrc
 nis
 nntplib
+ntpath
+nturl2path
 numbers
+opcode
 operator
 optparse
 os
@@ -208,6 +232,7 @@ platform
 plistlib
 poplib
 posix
+posixpath
 pprint
 profile
 pstats
@@ -216,6 +241,7 @@ pwd
 py_compile
 pyclbr
 pydoc
+pydoc_data
 queue
 quopri
 random
@@ -241,6 +267,9 @@ socket
 socketserver
 spwd
 sqlite3
+sre_compile
+sre_constants
+sre_parse
 ssl
 stat
 statistics
@@ -265,6 +294,7 @@ test.support.bytecode_helper
 test.support.script_helper
 test.support.socket_helper
 textwrap
+this
 threading
 time
 timeit
@@ -326,6 +356,7 @@ xml.sax
 xml.sax.handler
 xml.sax.saxutils
 xml.sax.xmlreader
+xmlrpc
 xmlrpc.client
 xmlrpc.server
 zipapp
