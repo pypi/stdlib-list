@@ -32,7 +32,8 @@ def stdlib_list(version=None):
     file (used in :py:mod:`sphinx.ext.intersphinx`).
 
     :param str|None version: The version (as a string) whose list of libraries you want
-    (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, or ``"3.5"``).
+    (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, ``"3.5"``, ``"3.6"``,
+    ``"3.7"``, ``"3.8"``, or ``"3.9"``).
     If not specified, the current version of Python will be used.
 
     :return: A list of standard libraries from the specified version of Python
@@ -73,7 +74,8 @@ def in_stdlib(module_name, version=None):
 
     :param str|None module_name: The module name (as a string) to query for.
     :param str|None version: The version (as a string) whose list of libraries you want
-    (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, or ``"3.5"``).
+    (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, ``"3.5"``, ``"3.6"``,
+    ``"3.7"``, ``"3.8"``, or ``"3.9"``).
     If not specified, the current version of Python will be used.
 
     :return: A bool indicating if the given module name is part of standard libraries
