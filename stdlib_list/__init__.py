@@ -5,6 +5,8 @@ del get_versions
 
 # Import all the things that used to be in here for backwards-compatibility reasons
 from .base import (
+    base_dir,
+    list_dir,
     stdlib_list,
     in_stdlib,
     get_canonical_version,

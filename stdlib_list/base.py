@@ -10,10 +10,12 @@ except ImportError:
     from functools32 import lru_cache
 
 long_versions = ["2.6.9", "2.7.9", "3.2.6", "3.3.6", "3.4.3", "3.5", "3.6",
-                 "3.7", "3.8", "3.9"]
+                 "3.7", "3.8", "3.9", "3.10"]
 
 short_versions = [".".join(x.split(".")[:2]) for x in long_versions]
 
+base_dir = os.path.dirname(os.path.realpath(__file__))
+list_dir = os.path.join(base_dir, "lists")
 
 def get_canonical_version(version):
 
