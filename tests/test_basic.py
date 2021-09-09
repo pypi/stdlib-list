@@ -8,7 +8,7 @@ PY2 = sys.version_info[0] == 2
 
 class CurrentVersionBase(unittest.TestCase):
     def setUp(self):
-        self.list = stdlib_list.stdlib_list(sys.version[:3])
+        self.list = stdlib_list.stdlib_list(".".join(str(x) for x in sys.version_info[:2]))
 
 
 class TestCurrentVersion(CurrentVersionBase):

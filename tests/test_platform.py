@@ -22,7 +22,7 @@ tk_libs = get_config_var("TKPATH")
 class UnifiedDiffAssertionError(AssertionError):
     def __init__(self, expected, got, msg="Differences"):
         super(UnifiedDiffAssertionError, self).__init__(self)
-        filename = "stdlib_list/lists/{}.txt".format(sys.version[:3])
+        filename = "stdlib_list/lists/{}.txt".format(".".join(str(x) for x in sys.version_info[:2]))
         diff = difflib.unified_diff(
             expected, got, lineterm="", fromfile="a/" + filename, tofile="b/" + filename
         )
@@ -38,7 +38,7 @@ class CurrentPlatformBase(object):
     ignore_test = False
 
     def setUp(self):
-        self.list = stdlib_list.stdlib_list(sys.version[:3])
+        self.list = stdlib_list.stdlib_list(".".join(str(x) for x in sys.version_info[:2]))
         if self.dir:
             self.assertTrue(os.path.isdir(self.dir))
 
