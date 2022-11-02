@@ -10,10 +10,11 @@ except ImportError:
     from functools32 import lru_cache
 
 long_versions = ["2.6.9", "2.7.9", "3.2.6", "3.3.6", "3.4.3", "3.5", "3.6",
-                 "3.7", "3.8", "3.9"]
+                 "3.7", "3.8", "3.9", "3.10", "3.11"]
 
 short_versions = [".".join(x.split(".")[:2]) for x in long_versions]
 
+builtin_versions = ["3.10", "3.11"]
 
 def get_canonical_version(version):
 
@@ -42,11 +43,14 @@ def stdlib_list(version=None):
     version = get_canonical_version(version) if version is not None else '.'.join(
         str(x) for x in sys.version_info[:2])
 
-    module_list_file = os.path.join("lists", "{}.txt".format(version))
+    if version in builtin_versions:
+        result = list(set(list(sys.stdlib_module_names) + list(sys.builtin_module_names)))
+    else:
+        module_list_file = os.path.join("lists", "{}.txt".format(version))
 
-    data = pkgutil.get_data("stdlib_list", module_list_file).decode()
+        data = pkgutil.get_data("stdlib_list", module_list_file).decode()
 
-    result = [y for y in [x.strip() for x in data.splitlines()] if y]
+        result = [y for y in [x.strip() for x in data.splitlines()] if y]
 
     return result
 
