@@ -3,6 +3,7 @@ from __future__ import print_function, absolute_import
 import os
 import pkgutil
 import sys
+import warnings
 
 try:
     from functools import lru_cache
@@ -15,6 +16,10 @@ long_versions = ["2.6.9", "2.7.9", "3.2.6", "3.3.6", "3.4.3", "3.5", "3.6",
 short_versions = [".".join(x.split(".")[:2]) for x in long_versions]
 
 builtin_versions = ["3.10", "3.11"]
+warning_message = (
+    "This package is no longer needed to get Python stdlib modules on Python 3.10+."
+    "Python itself provides such list, see the one line on the README."
+)
 
 def get_canonical_version(version):
 
@@ -45,6 +50,8 @@ def stdlib_list(version=None):
 
     if version in builtin_versions:
         result = list(set(list(sys.stdlib_module_names) + list(sys.builtin_module_names)))
+
+        warnings.warn(warning_message, DeprecationWarning)
     else:
         module_list_file = os.path.join("lists", "{}.txt".format(version))
 
