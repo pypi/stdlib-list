@@ -3,6 +3,13 @@ Python Standard Library List
 
 This package includes lists of all of the standard libraries for Python 2.6, 2.7, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, and 3.9 along with the code for scraping the official Python docs to get said lists.
 
+Note: from Python 3.10 onwards one can use the following one-liner to get the list of available modules:
+
+    >>> builtin_modules = list(set(list(sys.stdlib_module_names) + list(sys.builtin_module_names)))
+
+Thus, this package will not get any more updates.
+
+
 Listing the modules in the standard library? Wait, why on Earth would you care about that?!
 -------------------------------------------------------------------------------------------
 
@@ -21,4 +28,3 @@ Usage
     ['AL', 'BaseHTTPServer', 'Bastion', 'CGIHTTPServer', 'ColorPicker', 'ConfigParser', 'Cookie', 'DEVICE', 'DocXMLRPCServer', 'EasyDialogs']
 
 For more details, check out [the docs](http://python-stdlib-list.readthedocs.org/en/latest/).
-
