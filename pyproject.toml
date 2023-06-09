@@ -1,0 +1,36 @@
+[project]
+name = "stdlib-list"
+dynamic = ["version"]
+description = "A list of Python Standard Libraries (2.6-7, 3.2-9)."
+
+readme = "README.md"
+license = {file = "LICENSE"}
+
+authors = [
+  {name = "Jack Maney", email = "jackmaney@gmail.com"}
+]
+
+dependencies = [
+  "functools32;python_version<'3.2'"
+]
+
+[project.optional-dependencies]
+develop = [
+  "sphinx"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/pypi/stdlib-list"
+"Source" = "https://github.com/pypi/stdlib-list"
+
+[tools.versioneer]
+VCS = "git"
+style = "pep440"
+versionfile_source = "stdlib_list/_version.py"
+versionfile_build = "stdlib_list/_version.py"
+tag_prefix = ""
+parentdir_prefix = ""
+
+[build-system]
+requires = ["setuptools>=43.0.0", "wheel", "versioneer[toml]"]
+build-backend = "setuptools.build_meta"
