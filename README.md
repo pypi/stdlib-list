@@ -1,26 +1,40 @@
-Python Standard Library List
-============================
+# stdlib-list
 
-# This repo is now archived. I no longer have the spoons to maintain this in my spare time.
+This package includes lists of all of the standard libraries for Python 2.6,
+2.7, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, and 3.9 along with the code for
+scraping the official Python docs to get said lists.
 
-This package includes lists of all of the standard libraries for Python 2.6, 2.7, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, and 3.9 along with the code for scraping the official Python docs to get said lists.
+## Installation
 
-Listing the modules in the standard library? Wait, why on Earth would you care about that?!
--------------------------------------------------------------------------------------------
+`stdlib-list` is available on PyPI:
 
-Because knowing whether or not a module is part of the standard library will come in handy in [a project of mine](https://github.com/jackmaney/pypt). [And I'm not the only one](http://stackoverflow.com/questions/6463918/how-can-i-get-a-list-of-all-the-python-standard-library-modules) who would find this useful. Or, the TL;DR answer is that it's handy in situations when you're analyzing Python code and would like to find module dependencies.
+```bash
+python -m pip install stdlib-list
+```
 
-After googling for a way to generate a list of Python standard libraries (and looking through the answers to the previously-linked Stack Overflow question), I decided that I didn't like the existing solutions. So, I started by writing a scraper for the TOC of the Python Module Index for each of the versions of Python above.
+## Usage
 
-However, web scraping can be a fragile affair. Thanks to [a suggestion](https://github.com/jackmaney/python-stdlib-list/issues/1#issuecomment-86517208) by [@ncoghlan](https://github.com/ncoghlan), and some further help from [@birkenfeld](https://github.com/birkenfeld) and [@epc](https://github.com/epc), the population of the lists is now done by grabbing and parsing the Sphinx object inventory for the official Python docs of each relevant version.
-
-Usage
------
-
-    >>> from stdlib_list import stdlib_list
-    >>> libraries = stdlib_list("2.7")
-    >>> libraries[:10]
-    ['AL', 'BaseHTTPServer', 'Bastion', 'CGIHTTPServer', 'ColorPicker', 'ConfigParser', 'Cookie', 'DEVICE', 'DocXMLRPCServer', 'EasyDialogs']
+```python
+>>> from stdlib_list import stdlib_list
+>>> libraries = stdlib_list("2.7")
+>>> libraries[:10]
+['AL', 'BaseHTTPServer', 'Bastion', 'CGIHTTPServer', 'ColorPicker', 'ConfigParser', 'Cookie', 'DEVICE', 'DocXMLRPCServer', 'EasyDialogs']
+```
 
 For more details, check out [the docs](http://python-stdlib-list.readthedocs.org/en/latest/).
 
+## Credits and Project History
+
+This library was created by [@jackmaney](https://github.com/jackmaney),
+and was maintained with the help of [@ocefpaf](https://github.com/ocefpaf) and
+[@ericdill](https://github.com/ericdill) until
+[version 0.8.0](https://github.com/pypi/stdlib-list/releases/tag/v0.8.0),
+after which the primary maintainer
+[archived the project](https://github.com/pypi/stdlib-list/commit/7bc9a32789221b4e23edcb6a2c1466e8234aabbb).
+
+With the primary maintainer's approval, the project was transferred
+from `jackmaney/python-stdlib-list` to `pypi/stdlib-list`, and was adopted
+by new maintainers.
+
+The README immediately prior to the maintainership transfer is
+preserved at [`READMD.md.old`](./README.md.old).
