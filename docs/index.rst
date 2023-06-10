@@ -25,8 +25,6 @@ Contents
 
    install
    usage
-   fetch
-
 
 
 Indices and tables
