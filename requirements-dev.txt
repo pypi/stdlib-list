@@ -1,5 +1,0 @@
--r requirements.txt
-sphinx_rtd_theme
-check-manifest
-twine
-wheel

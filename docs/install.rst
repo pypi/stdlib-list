@@ -1,14 +1,18 @@
 Installation
 ============
 
-The easy way is via ``pip``:
+Most end users should use ``pip`` to install this package:
 
-::
+.. code-block:: bash
 
-    pip install stdlib-list
+    python -m pip install stdlib-list
 
-The hard way is to clone this repository, go into the directory into which you cloned this repo, and do a
 
-::
+If for whatever reason you need to install ``stdlib-list`` from the
+source repository instead:
 
-    python setup.py install
+.. code-block:: bash
+
+    git clone https://github.com/pypi/stdlib-list
+    cd stdlib-list
+    python -m pip install .

@@ -4,19 +4,14 @@ import os
 import pkgutil
 import sys
 
-try:
-    from functools import lru_cache
-except ImportError:
-    from functools32 import lru_cache
+from functools import lru_cache
 
-long_versions = ["2.6.9", "2.7.9", "3.2.6", "3.3.6", "3.4.3", "3.5", "3.6",
-                 "3.7", "3.8", "3.9"]
+long_versions = ["2.6.9", "2.7.9", "3.2.6", "3.3.6", "3.4.3", "3.5", "3.6", "3.7", "3.8", "3.9"]
 
 short_versions = [".".join(x.split(".")[:2]) for x in long_versions]
 
 
 def get_canonical_version(version):
-
     if version in long_versions:
         version = ".".join(version.split(".")[:2])
     elif version not in short_versions:
@@ -32,15 +27,19 @@ def stdlib_list(version=None):
     file (used in :py:mod:`sphinx.ext.intersphinx`).
 
     :param str|None version: The version (as a string) whose list of libraries you want
-    (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, or ``"3.5"``).
-    If not specified, the current version of Python will be used.
+        (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, or ``"3.5"``).
+
+        If not specified, the current version of Python will be used.
 
     :return: A list of standard libraries from the specified version of Python
     :rtype: list
     """
 
-    version = get_canonical_version(version) if version is not None else '.'.join(
-        str(x) for x in sys.version_info[:2])
+    version = (
+        get_canonical_version(version)
+        if version is not None
+        else ".".join(str(x) for x in sys.version_info[:2])
+    )
 
     module_list_file = os.path.join("lists", "{}.txt".format(version))
 
@@ -73,11 +72,12 @@ def in_stdlib(module_name, version=None):
 
     :param str|None module_name: The module name (as a string) to query for.
     :param str|None version: The version (as a string) whose list of libraries you want
-    (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, or ``"3.5"``).
-    If not specified, the current version of Python will be used.
+        (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, or ``"3.5"``).
+
+        If not specified, the current version of Python will be used.
 
     :return: A bool indicating if the given module name is part of standard libraries
-    for the specified version of Python.
+        for the specified version of Python.
     :rtype: list
     """
     ref_list = _stdlib_list_with_cache(version=version)
