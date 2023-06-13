@@ -22,7 +22,8 @@ tk_libs = get_config_var("TKPATH")
 class UnifiedDiffAssertionError(AssertionError):
     def __init__(self, expected, got, msg="Differences"):
         super(UnifiedDiffAssertionError, self).__init__(self)
-        filename = "stdlib_list/lists/{}.txt".format(sys.version[:3])
+        version = f"{sys.version_info.major}.{sys.version_info.minor}"
+        filename = "stdlib_list/lists/{}.txt".format(version)
         diff = difflib.unified_diff(
             expected, got, lineterm="", fromfile="a/" + filename, tofile="b/" + filename
         )
@@ -33,12 +34,12 @@ class UnifiedDiffAssertionError(AssertionError):
 
 
 class CurrentPlatformBase(object):
-
     dir = None
     ignore_test = False
 
     def setUp(self):
-        self.list = stdlib_list.stdlib_list(sys.version[:3])
+        version = f"{sys.version_info.major}.{sys.version_info.minor}"
+        self.list = stdlib_list.stdlib_list(version)
         if self.dir:
             self.assertTrue(os.path.isdir(self.dir))
 
@@ -140,17 +141,13 @@ if has_base_prefix:
     class TestBasePureLibDir(CurrentPlatformBase, unittest.TestCase):
         def setUp(self):
             base = sys.base_prefix
-            self.dir = get_python_lib(
-                standard_lib=True, plat_specific=False, prefix=base
-            )
+            self.dir = get_python_lib(standard_lib=True, plat_specific=False, prefix=base)
             super(TestBasePureLibDir, self).setUp()
 
     class TestBasePlatLibDir(CurrentPlatformBase, unittest.TestCase):
         def setUp(self):
             base = sys.base_prefix
-            self.dir = get_python_lib(
-                standard_lib=True, plat_specific=True, prefix=base
-            )
+            self.dir = get_python_lib(standard_lib=True, plat_specific=True, prefix=base)
             super(TestBasePlatLibDir, self).setUp()
 
 
@@ -158,7 +155,6 @@ if tk_libs:
     tk_libs = tk_libs.strip(os.pathsep)
 
     class TestTkDir(CurrentPlatformBase, unittest.TestCase):
-
         # Python 2.7 tk-libs includes a `test` package, however it is
         # added to sys.path by test.test_tk as a top level directory
         # so test.widget_tests becomes module name `widget_tests`

@@ -8,7 +8,8 @@ PY2 = sys.version_info[0] == 2
 
 class CurrentVersionBase(unittest.TestCase):
     def setUp(self):
-        self.list = stdlib_list.stdlib_list(sys.version[:3])
+        version = f"{sys.version_info.major}.{sys.version_info.minor}"
+        self.list = stdlib_list.stdlib_list(version)
 
 
 class TestCurrentVersion(CurrentVersionBase):
@@ -29,7 +30,6 @@ class TestCurrentVersion(CurrentVersionBase):
 
 
 class TestSysModules(CurrentVersionBase):
-
     # This relies on invocation in a clean python environment using unittest
     # not using pytest.
 
