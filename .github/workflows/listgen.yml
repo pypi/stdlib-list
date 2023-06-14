@@ -20,10 +20,12 @@ jobs:
           - "3.9"
 
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
+          # NOTE: matrix.python is intentionally not used here.
           python-version: "3.x"
       - name: support deps
         run: make dev INSTALL_EXTRA=support
@@ -31,6 +33,39 @@ jobs:
         env:
           PRE_LIST_VERSION: "${{ matrix.python }}"
         run: |
-          ./env/bin/python ./support/fetch-sphinx.py "${PRE_LIST_VERSION}"
+          ./env/bin/python ./support/fetch-sphinx.py "${PRE_LIST_VERSION}" > modules.txt
+      - name: upload pre-list
+        uses: actions/upload-artifact@v3
+        with:
+          name: pre-list-${{ matrix.python }}
+          path: modules.txt
 
+  expand-list-legacy:
+    needs: pre-list-legacy
+    strategy:
+      matrix:
+        python:
+          - "2.7"
+          - "3.2"
+          - "3.3"
+          - "3.4"
+          - "3.5"
+          - "3.6"
+          - "3.7"
+          - "3.8"
+          - "3.9"
 
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: pre-list-${{ matrix.python }}
+      - name: walk pre-list modules
+        run:
+          python -V
+          python ./support/walk-modules.py < modules.txt
