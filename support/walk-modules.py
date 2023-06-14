@@ -9,7 +9,13 @@ SEEN_MODS = set()
 
 def walk_pkgutil(mod_name, mod):
     for pkg in pkgutil.walk_packages(mod.__path__, mod_name + "."):
-        walk(pkg.name)
+        # pkgutil can produce false positives due to re-exports;
+        # we filter them out by attempting to import them.
+        try:
+            __import__(pkg.name)
+            walk(pkg.name)
+        except:
+            pass
 
 
 def walk_naive(mod_name, mod):
