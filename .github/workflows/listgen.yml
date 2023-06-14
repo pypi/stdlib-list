@@ -31,6 +31,6 @@ jobs:
         env:
           PRE_LIST_VERSION: "${{ matrix.python }}"
         run: |
-          ./env/bin/python ./support/fetch-sphinx "${PRE_LIST_VERSION}"
+          ./env/bin/python ./support/fetch-sphinx.py "${PRE_LIST_VERSION}"
 
 
