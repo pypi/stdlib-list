@@ -32,6 +32,9 @@ test = ["pytest", "pytest-cov", "coverage[toml]"]
 lint = ["black", "mypy", "ruff"]
 doc = ["sphinx", "sphinx_rtd_theme"]
 dev = ["build", "stdlib-list[test,lint,doc]"]
+# CI only: used for list generation for Python versions < 3.10.
+support = ["sphobjinv"]
+
 
 [tool.black]
 line-length = 100

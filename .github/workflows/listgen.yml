@@ -1,0 +1,36 @@
+name: Generate stdlib lists
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  pre-list-legacy:
+    strategy:
+      matrix:
+        python:
+          - "2.7"
+          - "3.2"
+          - "3.3"
+          - "3.4"
+          - "3.5"
+          - "3.6"
+          - "3.7"
+          - "3.8"
+          - "3.9"
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: support deps
+        run: make dev INSTALL_EXTRA=support
+      - name: build pre-list
+        env:
+          PRE_LIST_VERSION: "${{ matrix.python }}"
+        run: |
+          ./env/bin/python ./support/fetch-sphinx "${PRE_LIST_VERSION}"
+
+
