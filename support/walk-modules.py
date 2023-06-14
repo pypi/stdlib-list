@@ -7,9 +7,11 @@ SEEN_MODS = set()
 
 
 def walk(mod_name):
-    # Print the module itself.
-    print(mod_name)
-    SEEN_MODS.add(mod_name)
+    if mod_name in SEEN_MODS:
+        return
+    else:
+        SEEN_MODS.add(mod_name)
+        print(mod_name)
 
     # Try and import it.
     try:
@@ -36,8 +38,7 @@ def walk(mod_name):
                 # they might be things like "accelerator" modules that don't
                 # appear anywhere else.
                 # For example, `_bz2` might appear as a re-export.
-                if attr not in SEEN_MODS:
-                    walk(attr)
+                walk(attr)
     except ImportError:
         pass
 
