@@ -68,4 +68,5 @@ jobs:
       - name: walk pre-list modules
         run: |
           python -V
-          python ./support/walk-modules.py < modules.txt
+          python ./support/walk-modules.py < modules.txt > all-modules.txt
+          sort all-modules.txt
