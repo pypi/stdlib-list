@@ -37,7 +37,7 @@ def walk(mod_name):
                 # appear anywhere else.
                 # For example, `_bz2` might appear as a re-export.
                 if attr not in SEEN_MODS:
-                    print(attr)
+                    walk(attr)
     except ImportError:
         pass
 
