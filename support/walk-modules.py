@@ -67,3 +67,6 @@ def walk(mod_name):
 if __name__ == "__main__":
     for mod_name in sys.stdin:
         walk(mod_name.rstrip("\n"))
+
+    for mod_name in sys.builtin_module_names:
+        walk(mod_name)
