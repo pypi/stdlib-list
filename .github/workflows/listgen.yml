@@ -66,6 +66,6 @@ jobs:
         with:
           name: pre-list-${{ matrix.python }}
       - name: walk pre-list modules
-        run:
+        run: |
           python -V
           python ./support/walk-modules.py < modules.txt
