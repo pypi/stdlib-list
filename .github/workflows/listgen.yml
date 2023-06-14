@@ -11,10 +11,10 @@ jobs:
         python:
           # - "2.7"
           # - "3.2"
-          - "3.3"
-          - "3.4"
-          - "3.5"
-          - "3.6"
+          # - "3.3"
+          # - "3.4"
+          # - "3.5"
+          # - "3.6"
           - "3.7"
           - "3.8"
           - "3.9"
@@ -47,18 +47,15 @@ jobs:
         python:
           # - "2.7"
           # - "3.2"
-          - "3.3"
-          - "3.4"
-          - "3.5"
-          - "3.6"
+          # - "3.3"
+          # - "3.4"
+          # - "3.5"
+          # - "3.6"
           - "3.7"
           - "3.8"
           - "3.9"
 
-    # NOTE: Intentionally runs on an ancient Ubuntu to get access to older
-    # Python versions in setup-python.
-    # See: https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
