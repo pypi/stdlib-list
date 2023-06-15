@@ -56,7 +56,7 @@ jobs:
       - name: walk pre-list modules
         run: |
           python -V
-          python ./support/walk-modules-legacy.py all-modules.txt < modules.txt
+          python ./support/walk-modules.py all-modules.txt < modules.txt
           sort all-modules.txt
 
   expand-list:
@@ -76,5 +76,5 @@ jobs:
       - name: walk pre-list modules
         run: |
           python -V
-          python ./support/walk-modules-legacy.py all-modules.txt
+          python ./support/walk-modules.py all-modules.txt
           sort all-modules.txt
