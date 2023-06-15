@@ -25,14 +25,14 @@ jobs:
         run: make dev INSTALL_EXTRA=support
       - name: build pre-list
         env:
-          PRE_LIST_VERSION: "${{ matrix.python }}"
+          LISTGEN_PYTHON_VERSION: "${{ matrix.python }}"
         run: |
-          ./env/bin/python ./support/fetch-sphinx.py "${PRE_LIST_VERSION}" > modules.txt
+          ./env/bin/python ./support/fetch-sphinx.py "${LISTGEN_PYTHON_VERSION}" > pre-list.txt
       - name: upload pre-list
         uses: actions/upload-artifact@v3
         with:
           name: pre-list-${{ matrix.python }}
-          path: modules.txt
+          path: pre-list.txt
 
   expand-list-legacy:
     needs: pre-list-legacy
@@ -53,11 +53,13 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: pre-list-${{ matrix.python }}
-      - name: walk pre-list modules
+      - name: walk modules
         run: |
           python -V
-          python ./support/walk-modules.py all-modules.txt < modules.txt
-          sort all-modules.txt
+          python ./support/walk-modules.py "${LISTGEN_PYTHON_VERSION}.txt" < pre-list.txt
+          rm pre-list.txt
+          sort -o "${LISTGEN_PYTHON_VERSION}.txt" "${LISTGEN_PYTHON_VERSION}.txt"
+          mv "${LISTGEN_PYTHON_VERSION}.txt" ./stdlib_list/lists/
 
   expand-list:
     strategy:
@@ -73,8 +75,25 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
-      - name: walk pre-list modules
+      - name: walk modules
+        env:
+          LISTGEN_PYTHON_VERSION: ${{ matrix.python }}
         run: |
           python -V
-          python ./support/walk-modules.py all-modules.txt
-          sort all-modules.txt
+          python ./support/walk-modules.py "${LISTGEN_PYTHON_VERSION}.txt"
+          sort -o "${LISTGEN_PYTHON_VERSION}.txt" "${LISTGEN_PYTHON_VERSION}.txt"
+          mv "${LISTGEN_PYTHON_VERSION}.txt" ./stdlib_list/lists/
+
+      - name: create PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "[BOT] update list for ${{ matrix.python }}"
+          branch: update-stdlib-list-${{ matrix.python }}
+          branch-suffix: timestamp
+          title: "[BOT] update list for ${{ matrix.python }}"
+          body: |
+            This is an automated pull request, updating `${{ matrix.python }}.txt` after a detected change.
+
+            Please review manually before merging.
+          assignees: "woodruffw"
+          reviewers: "woodruffw"
