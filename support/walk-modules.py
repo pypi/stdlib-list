@@ -41,7 +41,14 @@ def walk_naive(mod_name, mod, io):
             # they might be things like "accelerator" modules that don't
             # appear anywhere else.
             # For example, `_bz2` might appear as a re-export.
-            walk(attr, io)
+            try:
+                # Again, try and import to avoid module-looking object
+                # that don't actually appear on disk. Experimentally,
+                # there are a few of these (like "TK").
+                __import__(attr)
+                walk(attr, io)
+            except ImportError:
+                continue
 
 
 def walk(mod_name, io):
