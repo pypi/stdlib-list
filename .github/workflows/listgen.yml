@@ -9,12 +9,6 @@ jobs:
     strategy:
       matrix:
         python:
-          # - "2.7"
-          # - "3.2"
-          # - "3.3"
-          # - "3.4"
-          # - "3.5"
-          # - "3.6"
           - "3.7"
           - "3.8"
           - "3.9"
@@ -45,12 +39,6 @@ jobs:
     strategy:
       matrix:
         python:
-          # - "2.7"
-          # - "3.2"
-          # - "3.3"
-          # - "3.4"
-          # - "3.5"
-          # - "3.6"
           - "3.7"
           - "3.8"
           - "3.9"
@@ -68,5 +56,25 @@ jobs:
       - name: walk pre-list modules
         run: |
           python -V
-          python ./support/walk-modules.py < modules.txt > all-modules.txt
+          python ./support/walk-modules-legacy.py all-modules.txt < modules.txt
+          sort all-modules.txt
+
+  expand-list:
+    strategy:
+      matrix:
+        python:
+          - "3.10"
+          - "3.11"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+      - name: walk pre-list modules
+        run: |
+          python -V
+          python ./support/walk-modules-legacy.py all-modules.txt
           sort all-modules.txt
