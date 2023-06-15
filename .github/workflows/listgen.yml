@@ -89,6 +89,7 @@ jobs:
         with:
           commit-message: "[BOT] update list for ${{ matrix.python }}"
           branch: update-stdlib-list-${{ matrix.python }}
+          base: main
           branch-suffix: timestamp
           title: "[BOT] update list for ${{ matrix.python }}"
           body: |
