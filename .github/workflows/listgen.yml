@@ -84,17 +84,17 @@ jobs:
           sort -o "${LISTGEN_PYTHON_VERSION}.txt" "${LISTGEN_PYTHON_VERSION}.txt"
           mv "${LISTGEN_PYTHON_VERSION}.txt" ./stdlib_list/lists/
 
-      - name: create PR
-        uses: peter-evans/create-pull-request@v5
-        with:
-          commit-message: "[BOT] update list for ${{ matrix.python }}"
-          branch: update-stdlib-list-${{ matrix.python }}
-          base: main
-          branch-suffix: timestamp
-          title: "[BOT] update list for ${{ matrix.python }}"
-          body: |
-            This is an automated pull request, updating `${{ matrix.python }}.txt` after a detected change.
+      # - name: create PR
+      #   uses: peter-evans/create-pull-request@v5
+      #   with:
+      #     commit-message: "[BOT] update list for ${{ matrix.python }}"
+      #     branch: update-stdlib-list-${{ matrix.python }}
+      #     base: main
+      #     branch-suffix: timestamp
+      #     title: "[BOT] update list for ${{ matrix.python }}"
+      #     body: |
+      #       This is an automated pull request, updating `${{ matrix.python }}.txt` after a detected change.
 
-            Please review manually before merging.
-          assignees: "woodruffw"
-          reviewers: "woodruffw"
+      #       Please review manually before merging.
+      #     assignees: "woodruffw"
+      #     reviewers: "woodruffw"
