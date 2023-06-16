@@ -39,7 +39,7 @@ def stdlib_list(version=None):
     Libraries for that version.
 
     :param str|None version: The version (as a string) whose list of libraries you want
-        (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, or ``"3.5"``).
+        (formatted as ``X.Y``, e.g. ``"2.7"`` or ``"3.10"``).
 
         If not specified, the current version of Python will be used.
 
@@ -84,7 +84,7 @@ def in_stdlib(module_name, version=None):
 
     :param str|None module_name: The module name (as a string) to query for.
     :param str|None version: The version (as a string) whose list of libraries you want
-        (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, or ``"3.5"``).
+        (formatted as ``X.Y``, e.g. ``"2.7"`` or ``"3.10"``).
 
         If not specified, the current version of Python will be used.
 
