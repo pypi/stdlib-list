@@ -70,7 +70,7 @@ reformat:
 test tests: $(VENV)/pyvenv.cfg
 	. $(VENV_BIN)/activate && \
 		pytest --cov=$(PY_MODULE) $(T) $(TEST_ARGS) && \
-		python -m coverage report -m $(COV_ARGS)
+		python -m coverage report -m $(COV_ARGS) --fail-under 100
 
 .PHONY: doc
 doc: $(VENV)/pyvenv.cfg
