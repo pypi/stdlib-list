@@ -25,3 +25,5 @@ def test_self_consistent(version):
 
     for mod_name in modules:
         assert stdlib_list.in_stdlib(mod_name, version)
+
+    assert modules == stdlib_list.stdlib_list(version)
