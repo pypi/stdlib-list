@@ -6,7 +6,20 @@ import sys
 
 from functools import lru_cache
 
-long_versions = ["2.6.9", "2.7.9", "3.2.6", "3.3.6", "3.4.3", "3.5", "3.6", "3.7", "3.8", "3.9"]
+long_versions = [
+    "2.6.9",
+    "2.7.9",
+    "3.2.6",
+    "3.3.6",
+    "3.4.3",
+    "3.5",
+    "3.6",
+    "3.7",
+    "3.8",
+    "3.9",
+    "3.10",
+    "3.11",
+]
 
 short_versions = [".".join(x.split(".")[:2]) for x in long_versions]
 
@@ -23,8 +36,7 @@ def get_canonical_version(version):
 def stdlib_list(version=None):
     """
     Given a ``version``, return a ``list`` of names of the Python Standard
-    Libraries for that version. These names are obtained from the Sphinx inventory
-    file (used in :py:mod:`sphinx.ext.intersphinx`).
+    Libraries for that version.
 
     :param str|None version: The version (as a string) whose list of libraries you want
         (one of ``"2.6"``, ``"2.7"``, ``"3.2"``, ``"3.3"``, ``"3.4"``, or ``"3.5"``).

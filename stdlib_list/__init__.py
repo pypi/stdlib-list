@@ -8,3 +8,11 @@ from .base import (
     short_versions,
     long_versions,
 )
+
+__all__ = [
+    "stdlib_list",
+    "in_stdlib",
+    "get_canonical_version",
+    "short_versions",
+    "long_versions",
+]
