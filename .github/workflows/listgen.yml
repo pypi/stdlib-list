@@ -1,0 +1,115 @@
+name: Generate stdlib lists
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 2"
+
+jobs:
+  pre-list-legacy:
+    strategy:
+      matrix:
+        python:
+          - "3.7"
+          - "3.8"
+          - "3.9"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          # NOTE: matrix.python is intentionally not used here.
+          python-version: "3.x"
+      - name: support deps
+        run: make dev INSTALL_EXTRA=support
+      - name: build pre-list
+        env:
+          LISTGEN_PYTHON_VERSION: "${{ matrix.python }}"
+        run: |
+          ./env/bin/python ./support/fetch-sphinx.py "${LISTGEN_PYTHON_VERSION}" > pre-list.txt
+      - name: upload pre-list
+        uses: actions/upload-artifact@v3
+        with:
+          name: pre-list-${{ matrix.python }}
+          path: pre-list.txt
+
+  expand-list-legacy:
+    needs: pre-list-legacy
+    strategy:
+      matrix:
+        python:
+          - "3.7"
+          - "3.8"
+          - "3.9"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: pre-list-${{ matrix.python }}
+      - name: walk modules
+        run: |
+          python -V
+          python ./support/walk-modules.py "${LISTGEN_PYTHON_VERSION}.txt" < pre-list.txt
+          rm pre-list.txt
+          sort -o "${LISTGEN_PYTHON_VERSION}.txt" "${LISTGEN_PYTHON_VERSION}.txt"
+          mv "${LISTGEN_PYTHON_VERSION}.txt" ./stdlib_list/lists/
+      - name: create PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "[BOT] update list for ${{ matrix.python }}"
+          branch: update-stdlib-list-${{ matrix.python }}
+          base: main
+          branch-suffix: timestamp
+          title: "[BOT] update list for ${{ matrix.python }}"
+          body: |
+            This is an automated pull request, updating `${{ matrix.python }}.txt` after a detected change.
+
+            Please review manually before merging.
+          assignees: "woodruffw"
+          reviewers: "woodruffw"
+
+  expand-list:
+    strategy:
+      matrix:
+        python:
+          - "3.10"
+          - "3.11"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+      - name: walk modules
+        env:
+          LISTGEN_PYTHON_VERSION: ${{ matrix.python }}
+        run: |
+          python -V
+          python ./support/walk-modules.py "${LISTGEN_PYTHON_VERSION}.txt"
+          sort -o "${LISTGEN_PYTHON_VERSION}.txt" "${LISTGEN_PYTHON_VERSION}.txt"
+          mv "${LISTGEN_PYTHON_VERSION}.txt" ./stdlib_list/lists/
+
+      - name: create PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "[BOT] update list for ${{ matrix.python }}"
+          branch: update-stdlib-list-${{ matrix.python }}
+          base: main
+          branch-suffix: timestamp
+          title: "[BOT] update list for ${{ matrix.python }}"
+          body: |
+            This is an automated pull request, updating `${{ matrix.python }}.txt` after a detected change.
+
+            Please review manually before merging.
+          assignees: "woodruffw"
+          reviewers: "woodruffw"
