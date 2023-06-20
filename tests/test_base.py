@@ -18,9 +18,9 @@ def test_get_canonical_version_raises(version):
         stdlib_list.get_canonical_version(version)
 
 
-@pytest.mark.parametrize("version", stdlib_list.short_versions)
+@pytest.mark.parametrize("version", [*stdlib_list.short_versions, *stdlib_list.long_versions])
 def test_self_consistent(version):
-    list_path = f"lists/{version}.txt"
+    list_path = f"lists/{stdlib_list.get_canonical_version(version)}.txt"
     modules = pkgutil.get_data("stdlib_list", list_path).decode().splitlines()
 
     for mod_name in modules:
