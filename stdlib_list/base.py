@@ -1,9 +1,6 @@
-from __future__ import print_function, absolute_import
-
 import os
 import pkgutil
 import sys
-
 from functools import lru_cache
 
 long_versions = [
@@ -24,16 +21,16 @@ long_versions = [
 short_versions = [".".join(x.split(".")[:2]) for x in long_versions]
 
 
-def get_canonical_version(version):
+def get_canonical_version(version: str) -> str:
     if version in long_versions:
         version = ".".join(version.split(".")[:2])
     elif version not in short_versions:
-        raise ValueError("No such version: {}".format(version))
+        raise ValueError(f"No such version: {version}")
 
     return version
 
 
-def stdlib_list(version=None):
+def stdlib_list(version: str | None = None) -> list[str]:
     """
     Given a ``version``, return a ``list`` of names of the Python Standard
     Libraries for that version.
@@ -53,9 +50,9 @@ def stdlib_list(version=None):
         else ".".join(str(x) for x in sys.version_info[:2])
     )
 
-    module_list_file = os.path.join("lists", "{}.txt".format(version))
+    module_list_file = os.path.join("lists", f"{version}.txt")
 
-    data = pkgutil.get_data("stdlib_list", module_list_file).decode()
+    data = pkgutil.get_data("stdlib_list", module_list_file).decode()  # type: ignore[union-attr]
 
     result = [y for y in [x.strip() for x in data.splitlines()] if y]
 
@@ -63,13 +60,13 @@ def stdlib_list(version=None):
 
 
 @lru_cache(maxsize=16)
-def _stdlib_list_with_cache(version=None):
+def _stdlib_list_with_cache(version: str | None = None) -> list[str]:
     """Internal cached version of `stdlib_list`"""
     return stdlib_list(version=version)
 
 
 @lru_cache(maxsize=256)
-def in_stdlib(module_name, version=None):
+def in_stdlib(module_name: str, version: str | None = None) -> bool:
     """
     Return a ``bool`` indicating if module ``module_name`` is in the list of stdlib
     symbols for python version ``version``. If ``version`` is ``None`` (default), the
