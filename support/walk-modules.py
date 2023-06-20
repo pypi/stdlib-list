@@ -83,4 +83,9 @@ if __name__ == "__main__":
                 walk(mod_name, io)
         else:
             for mod_name in sys.stdin:
+                # Our precomputed list might not start at the root, since it
+                # might be a package rather than a module.
+                if "." in mod_name:
+                    top_mod = mod_name.split(".")[0]
+                    walk(top_mod, io)
                 walk(mod_name.rstrip("\n"), io)
