@@ -55,6 +55,8 @@ jobs:
         with:
           name: pre-list-${{ matrix.python }}
       - name: walk modules
+        env:
+          LISTGEN_PYTHON_VERSION: ${{ matrix.python }}
         run: |
           python -V
           python ./support/walk-modules.py "${LISTGEN_PYTHON_VERSION}.txt" < pre-list.txt
