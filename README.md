@@ -1,8 +1,7 @@
 # stdlib-list
 
-This package includes lists of all of the standard libraries for Python 2.6,
-2.7, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, and 3.9 along with the code for
-scraping the official Python docs to get said lists.
+This package includes lists of all of the standard libraries for Python 2.6
+through 3.11.
 
 **IMPORTANT**: If you're on Python 3.10 or newer, you **probably don't need this library**.
 See [`sys.stdlib_module_names`](https://docs.python.org/3/library/sys.html#sys.stdlib_module_names)

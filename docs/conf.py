@@ -30,10 +30,9 @@ from stdlib_list import __version__
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
-    "sphinx_rtd_theme",
 ]
 
-html_theme = "sphinx_rtd_theme"
+html_theme = "furo"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -48,8 +47,8 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "Python Standard Library List"
-copyright = "2015, Jack Maney"
+project = "stdlib-list"
+copyright = "2015, stdlib-list authors"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

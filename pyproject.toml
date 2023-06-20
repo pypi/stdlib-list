@@ -30,11 +30,27 @@ Source = "https://github.com/pypi/stdlib-list"
 [project.optional-dependencies]
 test = ["pytest", "pytest-cov", "coverage[toml]"]
 lint = ["black", "mypy", "ruff"]
-doc = ["sphinx", "sphinx_rtd_theme"]
+doc = ["sphinx", "furo"]
 dev = ["build", "stdlib-list[test,lint,doc]"]
 # CI only: used for list generation for Python versions < 3.10.
 support = ["sphobjinv"]
 
+[tool.mypy]
+allow_redefinition = true
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+sqlite_cache = true
+strict_equality = true
+warn_no_return = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
 
 [tool.black]
 line-length = 100
@@ -42,3 +58,4 @@ line-length = 100
 [tool.ruff]
 select = ["E", "F", "I", "W", "UP"]
 target-version = "py37"
+line-length = 100
