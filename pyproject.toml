@@ -30,7 +30,7 @@ Source = "https://github.com/pypi/stdlib-list"
 [project.optional-dependencies]
 test = ["pytest", "pytest-cov", "coverage[toml]"]
 lint = ["black", "mypy", "ruff"]
-doc = ["sphinx", "sphinx_rtd_theme"]
+doc = ["sphinx", "furo"]
 dev = ["build", "stdlib-list[test,lint,doc]"]
 # CI only: used for list generation for Python versions < 3.10.
 support = ["sphobjinv"]
