@@ -53,22 +53,35 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
+
       - uses: actions/download-artifact@v3
         with:
           name: pre-list-${{ matrix.python }}
+
       - name: walk modules
         env:
           LISTGEN_PYTHON_VERSION: ${{ matrix.python }}
+          LISTGEN_DRY_RUN: ${{ inputs.dry-run }}
         run: |
-          python -V
           python ./support/walk-modules.py "${LISTGEN_PYTHON_VERSION}.txt" < pre-list.txt
           rm pre-list.txt
-          sort -o "${LISTGEN_PYTHON_VERSION}.txt" "${LISTGEN_PYTHON_VERSION}.txt"
-          mv "${LISTGEN_PYTHON_VERSION}.txt" ./stdlib_list/lists/
+
+          sort -u -o ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
+            ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
+            "${LISTGEN_PYTHON_VERSION}.txt"
+
+          rm "${LISTGEN_PYTHON_VERSION}.txt"
+
+          if [[ "${LISTGEN_DRY_RUN}" == "true" ]]; then
+            git diff
+          fi
+
       - name: create PR
+        if: ${{ !inputs.dry-run }}
         uses: peter-evans/create-pull-request@v5
         with:
           commit-message: "[BOT] update list for ${{ matrix.python }}"
@@ -94,22 +107,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
+
       - name: walk modules
         env:
           LISTGEN_PYTHON_VERSION: ${{ matrix.python }}
           LISTGEN_DRY_RUN: ${{ inputs.dry-run }}
         run: |
-          python -V
           python ./support/walk-modules.py "${LISTGEN_PYTHON_VERSION}.txt"
-          sort -o "${LISTGEN_PYTHON_VERSION}.txt" "${LISTGEN_PYTHON_VERSION}.txt"
+
+          sort -u -o ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
+            ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
+            "${LISTGEN_PYTHON_VERSION}.txt"
+
+          rm "${LISTGEN_PYTHON_VERSION}.txt"
 
           if [[ "${LISTGEN_DRY_RUN}" == "true" ]]; then
-            diff ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" "${LISTGEN_PYTHON_VERSION}.txt"
-          else
-            mv "${LISTGEN_PYTHON_VERSION}.txt" ./stdlib_list/lists/
+            git diff
           fi
 
       - name: create PR
