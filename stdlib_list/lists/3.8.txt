@@ -899,6 +899,7 @@ test.ann_module
 test.ann_module2
 test.ann_module3
 test.audiotests
+test.audit-tests
 test.autotest
 test.bad_coding
 test.bad_coding2
@@ -923,6 +924,7 @@ test.dataclass_module_1
 test.dataclass_module_1_str
 test.dataclass_module_2
 test.dataclass_module_2_str
+test.dataclass_textanno
 test.datetimetester
 test.dis_module
 test.doctest_aliases
@@ -1015,11 +1017,13 @@ test.test_asyncio.echo
 test.test_asyncio.echo2
 test.test_asyncio.echo3
 test.test_asyncio.functional
+test.test_asyncio.test_asyncio_waitfor
 test.test_asyncio.test_base_events
 test.test_asyncio.test_buffered_proto
 test.test_asyncio.test_context
 test.test_asyncio.test_events
 test.test_asyncio.test_futures
+test.test_asyncio.test_futures2
 test.test_asyncio.test_locks
 test.test_asyncio.test_pep492
 test.test_asyncio.test_proactor_events
@@ -1296,6 +1300,7 @@ test.test_importlib.source.test_file_loader
 test.test_importlib.source.test_finder
 test.test_importlib.source.test_path_hook
 test.test_importlib.source.test_source_encoding
+test.test_importlib.stubs
 test.test_importlib.test_abc
 test.test_importlib.test_api
 test.test_importlib.test_lazy
@@ -1617,11 +1622,13 @@ tkinter.test
 tkinter.test.runtktests
 tkinter.test.support
 tkinter.test.test_tkinter
+tkinter.test.test_tkinter.test_colorchooser
 tkinter.test.test_tkinter.test_font
 tkinter.test.test_tkinter.test_geometry_managers
 tkinter.test.test_tkinter.test_images
 tkinter.test.test_tkinter.test_loadtk
 tkinter.test.test_tkinter.test_misc
+tkinter.test.test_tkinter.test_simpledialog
 tkinter.test.test_tkinter.test_text
 tkinter.test.test_tkinter.test_variables
 tkinter.test.test_tkinter.test_widgets
@@ -1748,7 +1755,15 @@ xml.etree.cElementTree
 xml.parsers
 xml.parsers.expat
 xml.parsers.expat.errors
+xml.parsers.expat.errors.dom
+xml.parsers.expat.errors.etree
+xml.parsers.expat.errors.parsers
+xml.parsers.expat.errors.sax
 xml.parsers.expat.model
+xml.parsers.expat.model.dom
+xml.parsers.expat.model.etree
+xml.parsers.expat.model.parsers
+xml.parsers.expat.model.sax
 xml.sax
 xml.sax._exceptions
 xml.sax.expatreader
