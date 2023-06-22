@@ -1,5 +1,9 @@
 # stdlib-list
 
+[![PyPI version](https://badge.fury.io/py/stdlib-list.svg)](https://badge.fury.io/py/stdlib-list)
+[![Downloads](https://static.pepy.tech/badge/stdlib-list)](https://pepy.tech/project/stdlib-list)
+[![CI](https://github.com/pypi/stdlib-list/actions/workflows/ci.yml/badge.svg)](https://github.com/pypi/stdlib-list/actions/workflows/ci.yml)
+
 This package includes lists of all of the standard libraries for Python 2.6
 through 3.11.
 
