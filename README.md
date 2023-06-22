@@ -25,7 +25,7 @@ python -m pip install stdlib-list
 ['AL', 'BaseHTTPServer', 'Bastion', 'CGIHTTPServer', 'ColorPicker', 'ConfigParser', 'Cookie', 'DEVICE', 'DocXMLRPCServer', 'EasyDialogs']
 ```
 
-For more details, check out [the docs](http://python-stdlib-list.readthedocs.org/en/latest/).
+For more details, check out [the docs](https://pypi.github.io/stdlib-list/).
 
 ## Credits and Project History
 
