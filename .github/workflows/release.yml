@@ -32,7 +32,7 @@ jobs:
       run: python -m build
 
     - name: publish
-      uses: pypa/gh-action-pypi-publish@v1.8.8
+      uses: pypa/gh-action-pypi-publish@v1.8.10
 
     - name: sign
       uses: sigstore/gh-action-sigstore-python@v1.2.3
