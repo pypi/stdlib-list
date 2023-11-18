@@ -70,9 +70,14 @@ jobs:
           python ./support/walk-modules.py "${LISTGEN_PYTHON_VERSION}.txt" < pre-list.txt
           rm pre-list.txt
 
-          sort -u -o ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
-            ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
-            "${LISTGEN_PYTHON_VERSION}.txt"
+          if [[ -f "./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt"" ]]; then
+            sort -u -o ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
+              ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
+              "${LISTGEN_PYTHON_VERSION}.txt"
+          else
+            sort -u -o ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
+              "${LISTGEN_PYTHON_VERSION}.txt"
+          fi
 
           rm "${LISTGEN_PYTHON_VERSION}.txt"
 
