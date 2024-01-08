@@ -35,7 +35,7 @@ jobs:
         run: |
           ./env/bin/python ./support/fetch-sphinx.py "${LISTGEN_PYTHON_VERSION}" > pre-list.txt
       - name: upload pre-list
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pre-list-${{ matrix.python }}
           path: pre-list.txt
