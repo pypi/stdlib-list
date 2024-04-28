@@ -26,7 +26,7 @@ Current guiding rules
   Our rationale for this is that "stdlib-ness" is inherited from the parent
   module, even when not explicitly listed. In other words: anything that matches
   ``examplemodule.*`` is in the standard library by definition so long
-  as ``exmaplemodule`` is in the standard library.
+  as ``examplemodule`` is in the standard library.
 
 * Platform-specific modules are **best-effort**: ``stdlib-list`` is currently collected
   from Linux builds of CPython. This means that Windows- and macOS-specific modules
