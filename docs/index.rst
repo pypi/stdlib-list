@@ -19,6 +19,7 @@ Contents
 
    install
    usage
+   module-policy
 
 
 Indices and tables
