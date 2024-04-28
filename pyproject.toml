@@ -61,6 +61,6 @@ warn_unused_ignores = true
 line-length = 100
 
 [tool.ruff]
-select = ["E", "F", "I", "W", "UP"]
+lint.select = ["E", "F", "I", "W", "UP"]
 target-version = "py37"
 line-length = 100

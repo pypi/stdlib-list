@@ -57,7 +57,7 @@ $(VENV)/pyvenv.cfg: pyproject.toml
 lint: $(VENV)/pyvenv.cfg
 	. $(VENV_BIN)/activate && \
 		black --check $(ALL_PY_SRCS) && \
-		ruff $(ALL_PY_SRCS) && \
+		ruff check $(ALL_PY_SRCS) && \
 		mypy $(PY_MODULE)
 
 .PHONY: reformat
