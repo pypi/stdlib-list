@@ -30,6 +30,7 @@ from stdlib_list import __version__
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
+    "sphinx.ext.intersphinx",
 ]
 
 html_theme = "furo"
