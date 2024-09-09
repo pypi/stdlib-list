@@ -87,7 +87,7 @@ jobs:
 
       - name: create PR
         if: ${{ !inputs.dry-run }}
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "[BOT] update list for ${{ matrix.python }}"
           branch: update-stdlib-list-${{ matrix.python }}
@@ -142,7 +142,7 @@ jobs:
 
       - name: create PR
         if: ${{ !inputs.dry-run }}
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "[BOT] update list for ${{ matrix.python }}"
           branch: update-stdlib-list-${{ matrix.python }}
