@@ -86,6 +86,7 @@ _warnings
 _weakref
 _weakrefset
 _winapi
+_wmi
 _zoneinfo
 abc
 aifc
