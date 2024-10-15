@@ -24,7 +24,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = []
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 
 [project.urls]
 Homepage = "https://pypi.org/project/stdlib-list/"
@@ -34,7 +34,7 @@ Documentation = "https://pypi.github.io/stdlib-list/"
 
 [project.optional-dependencies]
 test = ["pytest", "pytest-cov", "coverage[toml]"]
-lint = ["black", "mypy", "ruff"]
+lint = ["mypy", "ruff"]
 doc = ["sphinx", "furo"]
 dev = ["build", "stdlib-list[test,lint,doc]"]
 # CI only: used for list generation for Python versions < 3.10.
@@ -57,10 +57,6 @@ warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
 
-[tool.black]
-line-length = 100
-
 [tool.ruff]
 lint.select = ["E", "F", "I", "W", "UP"]
-target-version = "py37"
 line-length = 100
