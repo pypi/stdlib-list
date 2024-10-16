@@ -11,7 +11,7 @@ include = ["tests/"]
 [project]
 name = "stdlib-list"
 dynamic = ["version"]
-description = "A list of Python Standard Libraries (2.7 through 3.12)."
+description = "A list of Python Standard Libraries (2.7 through 3.13)."
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [{ name = "Jack Maney", email = "jackmaney@gmail.com" }]
