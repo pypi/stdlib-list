@@ -21,17 +21,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
       - uses: actions/setup-python@v5
         with:
           # NOTE: matrix.python is intentionally not used here.
           python-version: "3.x"
+
       - name: support deps
         run: make dev INSTALL_EXTRA=support
+
       - name: build pre-list
         env:
           LISTGEN_PYTHON_VERSION: "${{ matrix.python }}"
         run: |
           ./env/bin/python ./support/fetch-sphinx.py "${LISTGEN_PYTHON_VERSION}" > pre-list.txt
+
       - name: upload pre-list
         uses: actions/upload-artifact@v4
         with:
@@ -51,6 +57,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-python@v5
         with:
@@ -112,6 +120,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
 
       - uses: actions/setup-python@v5
         with:
