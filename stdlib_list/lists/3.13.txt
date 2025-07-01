@@ -67,6 +67,7 @@ _pyrepl
 _pyrepl.__main__
 _pyrepl._minimal_curses
 _pyrepl._threading_handler
+_pyrepl.base_eventqueue
 _pyrepl.commands
 _pyrepl.completing_reader
 _pyrepl.console
@@ -86,6 +87,7 @@ _pyrepl.unix_console
 _pyrepl.unix_eventqueue
 _pyrepl.utils
 _pyrepl.windows_console
+_pyrepl.windows_eventqueue
 _queue
 _random
 _scproxy
