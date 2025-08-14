@@ -28,6 +28,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
           cache: pip
+          allow-prereleases: true
 
       - name: test
         run: make test INSTALL_EXTRA=test
