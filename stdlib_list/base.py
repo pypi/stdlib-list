@@ -58,18 +58,17 @@ def stdlib_list(version: str | None = None) -> list[str]:
 
     data = pkgutil.get_data("stdlib_list", module_list_file).decode()  # type: ignore[union-attr]
 
-    result = [y for y in [x.strip() for x in data.splitlines()] if y]
+    result = [y for x in data.splitlines() if (y := x.strip())]
 
     return result
 
 
 @lru_cache(maxsize=16)
-def _stdlib_list_with_cache(version: str | None = None) -> list[str]:
+def _stdlib_list_with_cache(version: str | None = None) -> frozenset[str]:
     """Internal cached version of `stdlib_list`"""
-    return stdlib_list(version=version)
+    return frozenset(stdlib_list(version=version))
 
 
-@lru_cache(maxsize=256)
 def in_stdlib(module_name: str, version: str | None = None) -> bool:
     """
     Return a ``bool`` indicating if module ``module_name`` is in the list of stdlib
