@@ -1,14 +1,25 @@
 #!/usr/bin/env python
+from __future__ import annotations
 
+import importlib
 import inspect
 import pkgutil
 import sys
 
+TYPE_CHECKING = False
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+    from types import ModuleType
+    from typing import Protocol
+
+    class Writer(Protocol):
+        def write(self, s: str, /) -> object: ...
+
 SEEN_MODS = set()
 
 
-def walk_pkgutil(mod_name, mod, io):
-    for pkg in pkgutil.walk_packages(mod.__path__, mod_name + "."):
+def walk_pkgutil(mod_name: str, locations: Sequence[str], io: Writer) -> None:
+    for pkg in pkgutil.walk_packages(locations, f"{mod_name}."):
         if pkg.name in SEEN_MODS:
             continue
         else:
@@ -18,7 +29,7 @@ def walk_pkgutil(mod_name, mod, io):
             print(pkg.name, file=io)
 
 
-def walk_naive(mod_name, mod, io):
+def walk_naive(mod_name: str, mod: ModuleType, io: Writer) -> None:
     for attr in dir(mod):
         attr_obj = getattr(mod, attr, None)
         # Shouldn't happen, but who knows.
@@ -33,8 +44,8 @@ def walk_naive(mod_name, mod, io):
         # and import the submodule by its qualified name.
         # If the import fails, we know it's a re-exported module.
         try:
-            submod_name = mod_name + "." + attr
-            __import__(submod_name)
+            submod_name = f"{mod_name}.{attr}"
+            importlib.import_module(submod_name)
             walk(submod_name, io)
         except ImportError:
             # ...but sometimes we do want to include re-exports, since
@@ -45,13 +56,13 @@ def walk_naive(mod_name, mod, io):
                 # Again, try and import to avoid module-looking object
                 # that don't actually appear on disk. Experimentally,
                 # there are a few of these (like "TK").
-                __import__(attr)
+                importlib.import_module(attr)
                 walk(attr, io)
             except ImportError:
                 continue
 
 
-def walk(mod_name, io):
+def walk(mod_name: str, io: Writer) -> None:
     if mod_name in SEEN_MODS:
         return
     else:
@@ -60,15 +71,16 @@ def walk(mod_name, io):
 
     # Try and import it.
     try:
-        mod = __import__(mod_name)
-
-        if hasattr(mod, "__path__"):
-            walk_pkgutil(mod_name, mod, io)
-        else:
-            walk_naive(mod_name, mod, io)
-
+        mod = importlib.import_module(mod_name)
     except ImportError:
-        pass
+        return
+
+    try:
+        locations = mod.__spec__.submodule_search_locations
+    except AttributeError:
+        walk_naive(mod_name, mod, io)
+    else:
+        walk_pkgutil(mod_name, locations, io)
 
 
 if __name__ == "__main__":
