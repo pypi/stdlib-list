@@ -23,7 +23,7 @@ def test_get_canonical_version_raises(version):
 def test_self_consistent_unordered(version):
     list_path = f"lists/{stdlib_list.get_canonical_version(version)}.txt"
     file = resources.files("stdlib_list") / list_path
-    modules = frozenset(file.read_text(encoding='utf-8').splitlines())
+    modules = frozenset(file.read_text(encoding="utf-8").splitlines())
 
     for mod_name in modules:
         assert stdlib_list.in_stdlib(mod_name, version)
@@ -35,7 +35,7 @@ def test_self_consistent_unordered(version):
 def test_self_consistent_ordered(version):
     list_path = f"lists/{stdlib_list.get_canonical_version(version)}.txt"
     file = resources.files("stdlib_list") / list_path
-    modules = list(file.read_text(encoding='utf-8').splitlines())
+    modules = list(file.read_text(encoding="utf-8").splitlines())
 
     for mod_name in modules:
         assert stdlib_list.in_stdlib(mod_name, version)
