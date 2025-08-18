@@ -7,6 +7,7 @@ from .base import (
     long_versions,
     short_versions,
     stdlib_list,
+    stdlib_modules,
 )
 
 __all__ = [
