@@ -11,6 +11,7 @@ from .base import (
 )
 
 __all__ = [
+    "stdlib_modules",
     "stdlib_list",
     "in_stdlib",
     "get_canonical_version",
