@@ -78,9 +78,12 @@ def walk(mod_name: str, io: Writer) -> None:
     try:
         locations = mod.__spec__.submodule_search_locations
     except AttributeError:
-        walk_naive(mod_name, mod, io)
-    else:
+        locations = None
+
+    if locations is not None:
         walk_pkgutil(mod_name, locations, io)
+    else:
+        walk_naive(mod_name, mod, io)
 
 
 if __name__ == "__main__":
