@@ -133,24 +133,11 @@ jobs:
       - name: walk modules
         env:
           LISTGEN_PYTHON_VERSION: ${{ matrix.python }}
-          LISTGEN_DRY_RUN: ${{ inputs.dry-run }}
-        run: |
-          python ./support/walk-modules.py "${LISTGEN_PYTHON_VERSION}.txt"
+        run: python ./support/walk-modules.py ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt"
 
-          if [[ -f "./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt"" ]]; then
-            sort -u -o ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
-              ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
-              "${LISTGEN_PYTHON_VERSION}.txt"
-          else
-            sort -u -o ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
-              "${LISTGEN_PYTHON_VERSION}.txt"
-          fi
-
-          rm "${LISTGEN_PYTHON_VERSION}.txt"
-
-          if [[ "${LISTGEN_DRY_RUN}" == "true" ]]; then
-            git diff
-          fi
+      - name: show diff
+        if: ${{ inputs.dry-run }}
+        run: git diff
 
       - name: create PR
         if: ${{ !inputs.dry-run }}
