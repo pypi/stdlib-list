@@ -7,6 +7,8 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   test:
     strategy:
@@ -37,7 +39,7 @@ jobs:
     if: always()
 
     needs:
-    - test
+      - test
 
     runs-on: ubuntu-latest
 
