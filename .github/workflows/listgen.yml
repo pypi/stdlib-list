@@ -10,6 +10,8 @@ on:
   schedule:
     - cron: "0 0 * * 2"
 
+permissions: {}
+
 jobs:
   pre-list-legacy:
     strategy:
@@ -20,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
 
@@ -49,14 +51,14 @@ jobs:
     strategy:
       matrix:
         python:
-          - "3.7"
-          - "3.8"
+          # - "3.7" # EOL
+          # - "3.8" # EOL
           - "3.9"
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
 
@@ -115,40 +117,28 @@ jobs:
           - "3.11"
           - "3.12"
           - "3.13"
+          - "3.14"
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
-
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: ${{ matrix.python }}
+          allow-prereleases: true
 
       - name: walk modules
         env:
           LISTGEN_PYTHON_VERSION: ${{ matrix.python }}
-          LISTGEN_DRY_RUN: ${{ inputs.dry-run }}
-        run: |
-          python ./support/walk-modules.py "${LISTGEN_PYTHON_VERSION}.txt"
+        run: python ./support/walk-modules.py ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt"
 
-          if [[ -f "./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt"" ]]; then
-            sort -u -o ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
-              ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
-              "${LISTGEN_PYTHON_VERSION}.txt"
-          else
-            sort -u -o ./stdlib_list/lists/"${LISTGEN_PYTHON_VERSION}.txt" \
-              "${LISTGEN_PYTHON_VERSION}.txt"
-          fi
-
-          rm "${LISTGEN_PYTHON_VERSION}.txt"
-
-          if [[ "${LISTGEN_DRY_RUN}" == "true" ]]; then
-            git diff
-          fi
+      - name: show diff
+        if: ${{ inputs.dry-run }}
+        run: git diff
 
       - name: create PR
         if: ${{ !inputs.dry-run }}
