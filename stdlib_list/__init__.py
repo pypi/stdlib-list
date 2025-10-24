@@ -1,4 +1,4 @@
-__version__ = "0.11.1"
+__version__ = "0.12.0"
 
 # Import all the things that used to be in here for backwards-compatibility reasons
 from .base import (
