@@ -37,8 +37,6 @@ test = ["pytest", "pytest-cov", "coverage[toml]"]
 lint = ["mypy", "ruff"]
 doc = ["sphinx", "furo"]
 dev = ["build", "stdlib-list[test,lint,doc]"]
-# CI only: used for list generation for Python versions < 3.10.
-support = ["sphobjinv"]
 
 [tool.mypy]
 allow_redefinition = true
