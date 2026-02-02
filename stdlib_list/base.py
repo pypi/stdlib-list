@@ -3,9 +3,8 @@ from __future__ import annotations
 import os
 import pkgutil
 import sys
-from functools import lru_cache
 
-long_versions = [
+long_versions = {
     "2.6.9",
     "2.7.9",
     "3.2.6",
@@ -21,9 +20,11 @@ long_versions = [
     "3.12",
     "3.13",
     "3.14",
-]
+}
 
-short_versions = [".".join(x.split(".")[:2]) for x in long_versions]
+short_versions = {".".join(x.split(".")[:2]) for x in long_versions}
+
+_cached_modules: dict[str, frozenset[str]] = {}
 
 
 def get_canonical_version(version: str) -> str:
@@ -33,6 +34,40 @@ def get_canonical_version(version: str) -> str:
         raise ValueError(f"No such version: {version}")
 
     return version
+
+
+def stdlib_modules(version: str | None = None) -> frozenset[str]:
+    """
+    Given a ``version``, return a ``frozenset`` of names of the modules in
+    the Python Standard Library for that version.
+
+    :param str|None version:
+        The version (as a string) whose list of libraries you want
+        (formatted as ``X.Y``, e.g. ``"2.7"`` or ``"3.10"``).
+
+        If not specified, the current version of Python will be used.
+
+    :return: The names of standard library modules from the given Python version
+    :rtype: frozenset
+    """
+    if version in _cached_modules:
+        return _cached_modules[version]
+
+    version = (
+        get_canonical_version(version)
+        if version is not None
+        else ".".join(str(x) for x in sys.version_info[:2])
+    )
+
+    module_list_file = os.path.join("lists", f"{version}.txt")
+
+    data = pkgutil.get_data("stdlib_list", module_list_file)
+    lines = data.decode().splitlines() if data else []
+
+    result = frozenset({y for x in lines if (y := x.strip())})
+    _cached_modules[version] = result
+
+    return result
 
 
 def stdlib_list(version: str | None = None) -> list[str]:
@@ -48,26 +83,7 @@ def stdlib_list(version: str | None = None) -> list[str]:
     :return: A list of standard libraries from the specified version of Python
     :rtype: list
     """
-
-    version = (
-        get_canonical_version(version)
-        if version is not None
-        else ".".join(str(x) for x in sys.version_info[:2])
-    )
-
-    module_list_file = os.path.join("lists", f"{version}.txt")
-
-    data = pkgutil.get_data("stdlib_list", module_list_file).decode()  # type: ignore[union-attr]
-
-    result = [y for x in data.splitlines() if (y := x.strip())]
-
-    return result
-
-
-@lru_cache(maxsize=16)
-def _stdlib_list_with_cache(version: str | None = None) -> frozenset[str]:
-    """Internal cached version of `stdlib_list`"""
-    return frozenset(stdlib_list(version=version))
+    return sorted(stdlib_modules(version))
 
 
 def in_stdlib(module_name: str, version: str | None = None) -> bool:
@@ -79,10 +95,6 @@ def in_stdlib(module_name: str, version: str | None = None) -> bool:
     Note that ``True`` will be returned for built-in modules too, since this project
     considers they are part of stdlib. See :issue:21.
 
-    It relies on ``@lru_cache`` to cache the stdlib list and query results for similar
-    calls. Therefore it is much more efficient than ``module_name in stdlib_list()``
-    especially if you wish to perform multiple checks.
-
     :param str|None module_name: The module name (as a string) to query for.
     :param str|None version: The version (as a string) whose list of libraries you want
         (formatted as ``X.Y``, e.g. ``"2.7"`` or ``"3.10"``).
@@ -91,7 +103,7 @@ def in_stdlib(module_name: str, version: str | None = None) -> bool:
 
     :return: A bool indicating if the given module name is part of standard libraries
         for the specified version of Python.
-    :rtype: list
+    :rtype: bool
     """
-    ref_list = _stdlib_list_with_cache(version=version)
+    ref_list = stdlib_modules(version=version)
     return module_name in ref_list
