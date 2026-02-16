@@ -4,8 +4,8 @@
 [![Downloads](https://static.pepy.tech/badge/stdlib-list)](https://pepy.tech/project/stdlib-list)
 [![CI](https://github.com/pypi/stdlib-list/actions/workflows/ci.yml/badge.svg)](https://github.com/pypi/stdlib-list/actions/workflows/ci.yml)
 
-This package includes lists of all of the standard libraries for Python 2.6
-through 3.14.
+This package includes lists of all of the standard libraries for Python 2.6-2.7,
+3.2-3.14.
 
 **IMPORTANT**: If you're on Python 3.10 or newer, you **probably don't need this library**.
 See [`sys.stdlib_module_names`](https://docs.python.org/3/library/sys.html#sys.stdlib_module_names)
