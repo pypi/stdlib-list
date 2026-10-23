@@ -91,7 +91,7 @@ def in_stdlib(module_name: str, version: str | None = None) -> bool:
 
     :return: A bool indicating if the given module name is part of standard libraries
         for the specified version of Python.
-    :rtype: list
+    :rtype: bool
     """
     ref_list = _stdlib_list_with_cache(version=version)
     return module_name in ref_list
