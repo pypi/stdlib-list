@@ -628,6 +628,7 @@ optparse
 os
 os.path
 pathlib
+pathlib._local
 pathlib._os
 pathlib.types
 pdb
@@ -648,6 +649,7 @@ py_compile
 pyclbr
 pydoc
 pydoc_data
+pydoc_data.module_docs
 pydoc_data.topics
 pyexpat
 pyexpat.errors
