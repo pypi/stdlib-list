@@ -21,6 +21,7 @@ long_versions = [
     "3.12",
     "3.13",
     "3.14",
+    "3.15",
 ]
 
 short_versions = [".".join(x.split(".")[:2]) for x in long_versions]

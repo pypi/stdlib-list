@@ -2,7 +2,7 @@ stdlib-list
 ===========
 
 This package includes lists of all of the standard libraries for Python 2.6-2.7,
-3.2-3.14.
+3.2-3.15.
 
 .. note::
 

@@ -4,7 +4,7 @@ Thank you for your interest in contributing to `stdlib-list`! We welcome contrib
 
 ## Overview
 
-`stdlib-list` provides lists of Python standard library modules for Python versions 2.6 through 3.13. The project maintains high standards for code quality, documentation, and testing.
+`stdlib-list` provides lists of Python standard library modules for Python versions 2.6 through 3.15. The project maintains high standards for code quality, documentation, and testing.
 
 ## Development Setup
 
