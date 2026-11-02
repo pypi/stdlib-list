@@ -241,7 +241,9 @@ dis
 distutils
 distutils._collections
 distutils._functools
+distutils._log
 distutils._macos_compat
+distutils._modified
 distutils._msvccompiler
 distutils.archive_util
 distutils.bcppcompiler
@@ -270,6 +272,10 @@ distutils.command.py37compat
 distutils.command.register
 distutils.command.sdist
 distutils.command.upload
+distutils.compat
+distutils.compat.numpy
+distutils.compat.py39
+distutils.compilers
 distutils.config
 distutils.core
 distutils.cygwinccompiler
