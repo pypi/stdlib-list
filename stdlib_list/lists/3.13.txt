@@ -625,6 +625,7 @@ py_compile
 pyclbr
 pydoc
 pydoc_data
+pydoc_data.module_docs
 pydoc_data.topics
 pyexpat
 pyexpat.errors
